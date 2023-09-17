@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class PartimerApplication implements CommandLineRunner  {
+public class PartimerApplication {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -16,10 +16,6 @@ public class PartimerApplication implements CommandLineRunner  {
 		SpringApplication.run(PartimerApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		System.out.println(this.passwordEncoder.encode("aniket@123"));
-
-	}
+	
 
 }
