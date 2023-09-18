@@ -377,7 +377,7 @@ public class StudentProfileController {
 				List<StudentProfileDTO> studentProfileDTOList = new ArrayList<StudentProfileDTO>();
 
 				for (StudentProfile lStudentProfile : studentProfileList) {
-
+					flag = true;
 					List<StudentExperience> lExperience = lStudentExperienceService
 							.findByUserId(lStudentProfile.getUserId());
 
@@ -419,10 +419,12 @@ public class StudentProfileController {
 					studentProfileDTOList.add(lDto);
 				}
 
-				studentProfileDTOList = studentProfileDTOList.stream().sorted((o1, o2) -> {
-					return (int) (o2.getMatchingObject().get("percentage").getPercentage()
-							- o1.getMatchingObject().get("percentage").getPercentage());
-				}).collect(Collectors.toList());
+			
+				  studentProfileDTOList = studentProfileDTOList.stream().sorted((o1, o2) -> {
+				  return (int) (o2.getMatchingObject().get("percentage").getPercentage() -
+				  o1.getMatchingObject().get("percentage").getPercentage());
+				  }).collect(Collectors.toList());
+				 
 
 				lResponseEntity.setResponseCode(200);
 				lResponseEntity.setResponseDescription("success");

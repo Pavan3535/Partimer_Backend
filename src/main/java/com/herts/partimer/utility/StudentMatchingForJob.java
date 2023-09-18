@@ -32,49 +32,54 @@ public class StudentMatchingForJob {
 		double lAllWeights = 0;
 		HashMap<String, MatchingObject> lMatchingObject = new HashMap<String, MatchingObject>();
 
-		MatchingObject role = rolesMatching(lJobProfile.getRole(), studentCategory);
-		lAllWeights += role.getWeights();
-		lMatchingObject.put("role", role);
+		try {
+			MatchingObject role = rolesMatching(lJobProfile.getRole(), studentCategory);
+			lAllWeights += role.getWeights();
+			lMatchingObject.put("role", role);
 
-		MatchingObject city = cityMatching(lJobProfile.getCity(), lStudentProfile.getCity());
-		lAllWeights += city.getWeights();
-		lMatchingObject.put("city", city);
+			MatchingObject city = cityMatching(lJobProfile.getCity(), lStudentProfile.getCity());
+			lAllWeights += city.getWeights();
+			lMatchingObject.put("city", city);
 
-		MatchingObject availability = availabilityMatching(lJobProfile, lStudentProfile);
-		lAllWeights += availability.getWeights();
-		lMatchingObject.put("availability", availability);
+			MatchingObject availability = availabilityMatching(lJobProfile, lStudentProfile);
+			lAllWeights += availability.getWeights();
+			lMatchingObject.put("availability", availability);
 
-		MatchingObject immediateJoining = immediateJoiningMatching(lJobProfile.isImmediateJoining(),
-				lStudentProfile.isImmediateJoining());
-		lAllWeights += immediateJoining.getWeights();
-		lMatchingObject.put("immediateJoining", immediateJoining);
+			MatchingObject immediateJoining = immediateJoiningMatching(lJobProfile.isImmediateJoining(),
+					lStudentProfile.isImmediateJoining());
+			lAllWeights += immediateJoining.getWeights();
+			lMatchingObject.put("immediateJoining", immediateJoining);
 
-		MatchingObject experience = experienceMatching(lJobProfile.getExperience(), lJobProfile.getCategory(),
-				lStudentProfile.getExperienceList());
-		lAllWeights += experience.getWeights();
-		lMatchingObject.put("experience", experience);
+			MatchingObject experience = experienceMatching(lJobProfile.getExperience(), lJobProfile.getCategory(),
+					lStudentProfile.getExperienceList());
+			lAllWeights += experience.getWeights();
+			lMatchingObject.put("experience", experience);
 
-		MatchingObject reference = referenceMatching(lJobProfile.isJobReferences(), lStudentProfile.getReferenceList());
-		lAllWeights += reference.getWeights();
-		lMatchingObject.put("reference", reference);
+			MatchingObject reference = referenceMatching(lJobProfile.isJobReferences(), lStudentProfile.getReferenceList());
+			lAllWeights += reference.getWeights();
+			lMatchingObject.put("reference", reference);
 
-		MatchingObject emailVerification = emailVerificationMatching(lJobProfile.isVerifiedEmail(),
-				lStudentProfile.isVerifiedEmail());
-		lAllWeights += emailVerification.getWeights();
-		lMatchingObject.put("emailVerification", emailVerification);
+			MatchingObject emailVerification = emailVerificationMatching(lJobProfile.isVerifiedEmail(),
+					lStudentProfile.isVerifiedEmail());
+			lAllWeights += emailVerification.getWeights();
+			lMatchingObject.put("emailVerification", emailVerification);
 
 //		MatchingObject profilePicture = profilePictureMatching(lJobProfile.isProfilePicture(),
 //				lStudentProfile.getProfilePicture());
 //		lAllWeights += profilePicture.getWeights();
 //		lMatchingObject.put("profilePicture", profilePicture);
 
-		MatchingObject category = categoryMatching(lJobProfile.getCategory(), studentCategory.getCategory());
-		lAllWeights += category.getWeights();
-		lMatchingObject.put("category", category);
+			MatchingObject category = categoryMatching(lJobProfile.getCategory(), studentCategory.getCategory());
+			lAllWeights += category.getWeights();
+			lMatchingObject.put("category", category);
 
-		MatchingObject percentage = new MatchingObject();
-		percentage.setPercentage(Double.valueOf(df.format(lAllWeights * 100)));
-		lMatchingObject.put("percentage", percentage);
+			MatchingObject percentage = new MatchingObject();
+			percentage.setPercentage(Double.valueOf(df.format(lAllWeights * 100)));
+			lMatchingObject.put("percentage", percentage);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return lMatchingObject;
 	}
